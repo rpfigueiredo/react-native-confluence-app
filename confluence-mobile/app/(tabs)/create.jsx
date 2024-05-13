@@ -4,7 +4,7 @@ import { Text, View } from 'react-native'
 const Create = () => {
     return (
       <View>
-        <Text> textInComponent </Text>
+        <Text> Create </Text>
       </View>
     )
   }
