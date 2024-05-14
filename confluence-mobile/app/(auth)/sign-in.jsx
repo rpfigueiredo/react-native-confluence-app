@@ -31,7 +31,7 @@ const SignIn = () => {
           <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">Iniciar sessão</Text>
 
           <FormField
-            title="E-mail"
+            title="Email"
             value={form.email}
             handleChangeText={(e) => setForm({ ...form, email: e })}
             otherStyles="mt-7"

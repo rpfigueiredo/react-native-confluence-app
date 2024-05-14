@@ -39,7 +39,7 @@ const SignUp = () => {
           />
 
           <FormField
-            title="E-mail"
+            title="Email"
             value={form.email}
             handleChangeText={(e) => setForm({ ...form, email: e })}
             otherStyles="mt-7"
