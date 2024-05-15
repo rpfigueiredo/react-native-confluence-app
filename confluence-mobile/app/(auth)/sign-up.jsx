@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { ScrollView, View, Image, Text } from "react-native";
+import { ScrollView, View, Image, Text, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { images } from "../../constants";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
+import { createUser } from "../../lib/appwrite";
 
 const SignUp = () => {
 
@@ -17,7 +18,21 @@ const SignUp = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const submit = () => {
+  const submit = async () => {
+    if (!form.username || !form.email || !form.password) {
+      Alert.alert("Error", "Por favor preencha todos os campos");
+    }
+
+    setIsSubmitting(true)
+    try {
+      const result = await createUser(form.email, form.password, form.username);
+
+      router.replace("/home");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -32,7 +47,7 @@ const SignUp = () => {
           <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">Cadastre-se</Text>
 
           <FormField
-            title="Nome de usuário"
+            title="Username"
             value={form.username}
             handleChangeText={(e) => setForm({ ...form, username: e })}
             otherStyles="mt-10"
