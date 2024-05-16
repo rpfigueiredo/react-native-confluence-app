@@ -10,6 +10,16 @@ export const config = {
     storageId: '66450fad00055081404c'
 }
 
+const {
+    endpoint,
+    platform,
+    projectId,
+    databaseId,
+    userCollectionId,
+    videoCollectionId,
+    storageId
+} = config;
+
 const client = new Client();
 
 client
@@ -86,3 +96,15 @@ export const getCurrentUser = async () => {
 }
 
 
+export const getAllPosts = async () => {
+    try {
+        const posts = await databases.listDocuments(
+            databaseId,
+            videoCollectionId
+        );
+
+        return posts.documents;
+    } catch (error) {
+        throw new Error(error);
+    }
+}
