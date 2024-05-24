@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Text, View, Image, TouchableOpacity } from 'react-native'
 import { icons } from '../constants'
+import { ResizeMode, Video } from "expo-av";
 
 const VideoCard = ({ video: { title, thumbnail, video, creator: { username, avatar } } }) => {
     const [play, setPlay] = useState(false);
@@ -8,7 +9,7 @@ const VideoCard = ({ video: { title, thumbnail, video, creator: { username, avat
         <View className="flex-col items-center px-4 mb-14">
             <View className="flex-row gap-3 items-start">
                 <View className="justify-center items-center flex-row flex-1">
-                    <View className="w-[46px] h-[46px] rounded-lg border border-secondary justify-center items-center p-0.5">
+                    <View className="w-[46px] h-[46px] rounded-lg border border-secondary justify-center items-center">
                         <Image
                             source={{ uri: avatar }}
                             className="w-full h-full rounded-lg"
@@ -30,12 +31,23 @@ const VideoCard = ({ video: { title, thumbnail, video, creator: { username, avat
             </View>
 
             {play ? (
-                <Text className="text-white">Rodando</Text>
+                <Video
+                    source={{ uri: video }}
+                    className="w-full h-60 rounded-xl mt-3 "
+                    resizeMode={ResizeMode.CONTAIN}
+                    useNativeControls
+                    shouldPlay
+                    onPlaybackStatusUpdate={(status) => {
+                        if (status.didJustFinish) {
+                            setPlay(false);
+                        }
+                    }}
+                />
             ) : (
                 <TouchableOpacity
-                className="w-full h-60 rounded-xl mt-3 relative justify-center items-center"
-                activeOpacity={0.7}
-                onPress={() => setPlay(true)}
+                    className="w-full h-60 rounded-xl mt-3 relative justify-center items-center"
+                    activeOpacity={0.7}
+                    onPress={() => setPlay(true)}
                 >
                     <Image
                         source={{ uri: thumbnail }}
