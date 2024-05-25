@@ -24,7 +24,13 @@ const SearchInput = ({initialQuery}) => {
                     if (!query) {
                         return Alert.alert(
                             "Consulta ausente",
-                            "Por favor, insira algo para pesquisar "
+                            "Por favor, insira algo para pesquisar"
+                        );
+                    }
+                    if (query.length < 3) {
+                        return Alert.alert(
+                            "Consulta curta",
+                            "A consulta deve ter pelo menos 3 caracteres."
                         );
                     }
                     if (pathname.startsWith("/search")) router.setParams({ query });
