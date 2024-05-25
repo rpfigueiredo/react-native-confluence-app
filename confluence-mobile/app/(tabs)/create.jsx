@@ -3,6 +3,7 @@ import { router } from "expo-router";
 import { ResizeMode, Video } from "expo-av";
 import * as DocumentPicker from "expo-document-picker";
 import { SafeAreaView } from "react-native-safe-area-context";
+import * as ImagePicker from 'expo-image-picker';
 import {
   View,
   Text,
@@ -14,8 +15,8 @@ import {
 
 import { icons } from "../../constants";
 import { createVideo } from "../../lib/appwrite";
-import  CustomButton  from "../../components/CustomButton";
-import  FormField  from "../../components/FormField";
+import CustomButton from "../../components/CustomButton";
+import FormField from "../../components/FormField";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Create = () => {
@@ -29,12 +30,10 @@ const Create = () => {
   });
 
   const openPicker = async (selectType) => {
-    const result = await DocumentPicker.getDocumentAsync
-    ({
-      type:
-        selectType === "image"
-          ? ["image/png", "image/jpg", "image/jpeg"]
-          : ["video/mp4", "video/gif"],
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: selectType === 'image' ? ImagePicker.MediaTypeOptions.Images : ImagePicker.MediaTypeOptions.Videos,
+      aspect: [4, 3],
+      quality: 1,
     });
 
     if (!result.canceled) {
@@ -55,7 +54,7 @@ const Create = () => {
   };
 
   const submit = async () => {
-    if (!form.prompt  || !form.title  || !form.thumbnail || !form.video) {
+    if (!form.prompt || !form.title || !form.thumbnail || !form.video) {
       return Alert.alert("Forneça todos os campos");
     }
 
