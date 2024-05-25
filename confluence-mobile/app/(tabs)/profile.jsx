@@ -6,6 +6,7 @@ import { getUserPosts, signOut } from '../../lib/appwrite';
 import useAppwrite from '../../lib/useAppwrite';
 import VideoCard from '../../components/VideoCard';
 import { useGlobalContext } from "../../context/GlobalProvider";
+import { StatusBar } from "expo-status-bar";
 import { icons } from '../../constants';
 import InfoBox from '../../components/InfoBox';
 import { router } from 'expo-router';
@@ -19,9 +20,9 @@ const Profile = () => {
         await signOut();
         setUser(null);
         setIsLogged(false);
-    
+
         router.replace("/sign-in");
-      };
+    };
 
     return (
         <SafeAreaView className="bg-primary h-full">
@@ -47,7 +48,7 @@ const Profile = () => {
                         <View className="w-16 h-16 border border-secondary rounded-lg justify-center items-center">
                             <Image
                                 source={{ uri: user?.avatar }}
-                                className="w-[90%] h-[90%] rounded-lg"
+                                className="w-full h-full rounded-lg"
                                 resizeMode="cover"
                             />
                         </View>
@@ -81,6 +82,7 @@ const Profile = () => {
                 )}
 
             />
+            <StatusBar backgroundColor="#161622" style="light" />
         </SafeAreaView>
     )
 }

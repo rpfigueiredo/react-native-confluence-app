@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { FlatList, Text, View, Image, RefreshControl, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-
-
+import { StatusBar } from "expo-status-bar";
 import { images } from "../../constants";
 import SearchInput from '../../components/SearchInput';
 import Trending from '../../components/Trending';
@@ -16,7 +15,7 @@ const Home = () => {
 
   const { user } = useGlobalContext();
   const { data: posts, refetch } = useAppwrite(getAllPosts);
-  const { data: latestPosts} = useAppwrite(getLatestPosts);
+  const { data: latestPosts } = useAppwrite(getLatestPosts);
 
 
   const [refreshing, setRefreshing] = useState(false);
@@ -34,7 +33,7 @@ const Home = () => {
         data={posts}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
-          <VideoCard video={item}/>
+          <VideoCard video={item} />
         )}
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">
@@ -44,7 +43,7 @@ const Home = () => {
                   Bem-vindo de volta,
                 </Text>
                 <Text className="text-2xl font-psemibold text-white">
-                {user?.username}
+                  {user?.username}
                 </Text>
               </View>
               <View className="mt-1.5">
@@ -72,6 +71,7 @@ const Home = () => {
         )}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       />
+      <StatusBar backgroundColor="#161622" style="light" />
     </SafeAreaView>
   )
 }

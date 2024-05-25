@@ -57,7 +57,7 @@ const TrendingItem = ({ activeItem, item }) => {
                         source={{
                             uri: item.thumbnail
                         }}
-                        className="w-52 h-72 rounded-[15px] my-5 overflow-hidden shadow-lg shadow-black/40"
+                        className="w-52 h-72 rounded-[19px] my-5 overflow-hidden shadow-lg shadow-black/40"
                         resizeMode="cover"
                     />
 

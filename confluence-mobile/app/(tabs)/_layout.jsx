@@ -1,5 +1,5 @@
 import { Image, Text, View } from "react-native";
-import { Redirect, Tabs } from "expo-router";
+import { Tabs } from "expo-router";
 
 import { icons } from "../../constants";
 
@@ -54,7 +54,7 @@ const TabsLayout = () => {
           }}
         />
 
-        <Tabs.Screen
+        {/* <Tabs.Screen
           name="bookmark"
           options={{
             title: "Bookmark",
@@ -68,7 +68,7 @@ const TabsLayout = () => {
               />
             ),
           }}
-        />
+        /> */}
 
         <Tabs.Screen
           name="create"
@@ -79,7 +79,7 @@ const TabsLayout = () => {
               <TabIcon
                 icon={icons.plus}
                 color={color}
-                name="Create"
+                name="Criar"
                 focused={focused}
               />
             ),
@@ -95,7 +95,7 @@ const TabsLayout = () => {
               <TabIcon
                 icon={icons.profile}
                 color={color}
-                name="Profile"
+                name="Perfil"
                 focused={focused}
               />
             ),
